@@ -1,0 +1,23 @@
+﻿@model ContactModel
+@{
+    ViewData["Title"] = "Deletar contato";
+}
+
+<div class="text-left">
+    <h1 class="display-4">Deletar contato</h1>
+    <p>Você confirma a deleção do contato?</p>
+    <p>
+        Nome: @Html.DisplayFor(model => model.Name)<br />
+        @Html.DisplayNameFor(model => model.Email): @Html.DisplayFor(model => model.Email)
+    </p>
+
+    <div class="text-right mt-4 mb-2">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-md btn-danger rounded-0"><i class="fa-solid fa-trash"></i> Deletar</button>
+            <a class="btn btn-md btn-primary rounded-0" asp-controller="Contacts" asp-action="Index">
+                <i class="bi bi-backward"></i> Voltar para a lista
+            </a>
+        </form>
+    </div>
+</div>

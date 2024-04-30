@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ContactModel>
+@{
+    ViewData["Title"] = "Contatos";
+}
+
+<div class="text-left">
+    <h1 class="display-4">Lista de contatos.</h1>
+    <p>Esta é a lista de contatos.</p>
+
+
+    <div class="text-right mt-4 mb-2">
+        <a class="btn btn-primary rounded-0" role="button" asp-asp-controller="Create" asp-action="Create"><i class="bi bi-plus-square"></i> Adicionar contato</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null){
+        <div class="alert alert-success" role="alert">
+            <button class="border-0 bg-transparent text-success close-alert">x</button>
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["InfoMessage"] != null)
+    {
+        <div class="alert alert-info" role="alert">
+            <button class="border-0 bg-transparent text-success close-alert">x</button>
+            @TempData["InfoMessage"]
+        </div>
+    }
+
+    @if(TempData["ErrorMessage"] != null){
+        <div class="alert alert-danger" role="alert">
+                <button class="border-0 bg-transparent text-danger close-alert">x</button>
+            This is a danger alert—check it out!
+        </div>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                @* <th scope="col">#</th> *@
+                <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
+                <th scope="col">Dt Criação</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach ( var contact in Model )
+                {
+                <tr>
+                    @* <th>@contact.Id</th> *@
+                    <td>@contact.Name</td>
+                    <td>@contact.Email</td>
+                    <td>@contact.CreatedDate</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" asp-route-id="@contact.Id" asp-controller="Contacts" asp-action="Edit">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a class="btn btn-sm btn-danger"  asp-route-id="@contact.Id" asp-controller="Contacts" asp-action="Delete">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
